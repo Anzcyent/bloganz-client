@@ -1,0 +1,16 @@
+export const appConstants = {
+    SET_RESPONSIVE: "SET_RESPONSIVE",
+    IS_LOADING: "IS_LOADING",
+    ERROR: "ERROR",
+}
+
+export const articlesConstants = {
+    GET_ARTICLES: "GET_ARTICLES",
+    GET_CURRENT_ARTICLE: "GET_CURRENT_ARTICLE",
+    CREATE_ARTICLE: "CREATE_ARTICLE",
+    GET_ARTICLES_OF_OWNER: "GET_ARTICLES_OF_OWNER",
+}
+
+export const authConstants = {
+    AUTH: "AUTH"
+}
