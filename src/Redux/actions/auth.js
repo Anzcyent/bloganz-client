@@ -115,6 +115,4 @@ export const generateNewToken = (token) => async (dispatch) => {
 export const authLogout = () => async (dispatch) => {
     const res = await getRequest('auth/logout');
     localStorage.removeItem('access_token');
-    window.location.href('/');
-    window.location.reload();
 }
