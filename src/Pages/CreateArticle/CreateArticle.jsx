@@ -41,9 +41,9 @@ const CreateArticle = () => {
 
     return (
         <main className="create-article-page">
-            <h2 className='create-article-page-title'>Create Article</h2>
+            <h2 className='create-article-page-title animate__animated animate__backInDown'>Create Article</h2>
 
-            <form method="POST" className="create-article-form">
+            <form method="POST" className="create-article-form animate__animated animate__zoomIn">
                 <div className="create-article-title">
                     <label htmlFor="title"><h4>Title</h4></label>
                     <input type="text" name="title" id="title" onChange={handleChange} />
@@ -63,7 +63,7 @@ const CreateArticle = () => {
 
 
             <Link to="/dashboard">
-                <button className="return-button"><i className="fas fa-arrow-left"></i> Return to dashboard</button>
+                <button className="return-button animate__animated animate__fadeInUp"><i className="fas fa-arrow-left"></i> Return to dashboard</button>
             </Link>
         </main>
     )

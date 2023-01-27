@@ -23,21 +23,21 @@ export const authRegister = (data, navigate) => async (dispatch) => {
 
         navigate('/');
     } catch (err) {
+        dispatch({
+            type: appConstants.ERROR,
+            payload: {
+                name: "register",
+                message: err.response.data.message
+            }
+        });
+
+        setTimeout(() => {
             dispatch({
                 type: appConstants.ERROR,
-                payload: {
-                    name: "register",
-                    message: err.response.data.message
-                }
+                payload: null
             });
+        }, 2500);
 
-            setTimeout(() => {
-                dispatch({
-                    type: appConstants.ERROR,
-                    payload: null
-                });
-            }, 2500);
-    
         throw new Error(err.response.data.message);
     }
 
@@ -110,4 +110,10 @@ export const generateNewToken = (token) => async (dispatch) => {
     } catch (err) {
         throw new Error(err.response.data.message)
     }
+}
+
+export const authLogout = () => async (dispatch) => {
+    const res = await getRequest('auth/logout');
+    localStorage.removeItem('access_token');
+    window.location.reload();
 }

@@ -10,7 +10,7 @@ import "./App.css"
 import { Navbar, Footer } from './Components'
 
 // Pages
-import { ArticlesPage, AboutPage, NotFound, Dashboard, CreateArticle, ArticlePage, RegisterPage, LoginPage, MyArticlesPage } from "./Pages"
+import { ArticlesPage, AboutPage, NotFound, Dashboard, CreateArticle, ArticlePage, RegisterPage, LoginPage, MyArticlesPage, HomePage } from "./Pages"
 
 const App = () => {
   const { responsive, isLoading, error } = useSelector(state => state.appReducer)
@@ -37,13 +37,6 @@ const App = () => {
     }
   }, []);
 
-  // redirect
-  useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/articles")
-    }
-  }, [location])
-
   // generate new token
   useEffect(() => {
     dispatch(generateNewToken(access_token))
@@ -55,6 +48,7 @@ const App = () => {
     <div className="app">
       <Navbar responsive={responsive} isLoading={isLoading} />
       <Routes>
+        <Route exact path="/" element={<HomePage />} />
         <Route exact path="/articles" element={<ArticlesPage isLoading={isLoading} />} />
         <Route exact path="/about" element={<AboutPage />} />
         <Route exact path="/dashboard" element={<Dashboard />} />

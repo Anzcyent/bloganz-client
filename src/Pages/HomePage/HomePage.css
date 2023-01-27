@@ -1,0 +1,38 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.home-page-image {
+    width: 75%;
+    height: 50vh;
+    margin-top: 15px;
+}
+
+.home-page-description {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.home-page-description h4 {
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .home-page-title {
+        font-size: 1rem;
+    }
+    .home-page-image {
+        height: 25vh;
+    }
+
+    .home-page-description h4 {
+        font-size: .8rem;
+    }
+
+    .home-page-description p {
+        font-size: .75rem;
+    }
+}

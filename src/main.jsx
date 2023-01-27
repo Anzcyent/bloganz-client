@@ -8,8 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 
 
 
-
-const store = configureStore()
+const store = configureStore();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store} >
@@ -17,4 +16,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <App />
       </Router>
   </Provider>,
-)
+);

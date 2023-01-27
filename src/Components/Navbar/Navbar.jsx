@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux";
-import { getRequest } from '../../Utils/Fetch/fetchData';
+import { useSelector, useDispatch } from "react-redux";
 import { Rings } from "react-loader-spinner"
+import { authLogout } from '../../Redux/actions/auth';
 import "./Navbar.css"
 
 const Navbar = ({ responsive, isLoading }) => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const { user } = useSelector(state => state.authReducer);
-  const [menu, setMenu] = useState(false)
+  const [menu, setMenu] = useState(false);
+  const dispatch = useDispatch();
   const access_token = localStorage.getItem('access_token');
 
 
   const logout = async () => {
-    const res = await getRequest('auth/logout');
-    localStorage.removeItem('access_token');
-    window.location.reload();
+    dispatch(authLogout());
   }
 
   return (
@@ -31,8 +30,8 @@ const Navbar = ({ responsive, isLoading }) => {
             to={`${pathname === "/dashboard/create-article" ? "/dashboard/create-article" : pathname === "/dashboard/my-articles" ? "/dashboard/my-articles" : "/dashboard"}`}
             style={{ color: `${(pathname === "/dashboard" || pathname === "/dashboard/create-article" || pathname === "/dashboard/my-articles") ? "var(--primary-color)" : "#fff"}`, textDecoration: "none" }}>Dashboard</NavLink>
         </li>
-        <li className={`navbar-list-item ${(pathname === "/articles" || pathname === "/") && "navbar-active"}`} >
-          <NavLink to="/articles" style={{ color: `${(pathname === "/articles" || pathname === "/") ? "var(--primary-color)" : "#fff"}`, textDecoration: "none" }}>Articles</NavLink>
+        <li className={`navbar-list-item ${pathname === "/articles" && "navbar-active"}`} >
+          <NavLink to="/articles" style={{ color: `${pathname === "/articles" ? "var(--primary-color)" : "#fff"}`, textDecoration: "none" }}>Articles</NavLink>
         </li>
         <li className={`navbar-list-item ${pathname === "/about" && "navbar-active"}`} >
           <NavLink to="/about" style={{ color: `${pathname === "/about" ? "var(--primary-color)" : "#fff"}`, textDecoration: "none" }}>About</NavLink>

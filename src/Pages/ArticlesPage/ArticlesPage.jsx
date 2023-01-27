@@ -33,7 +33,7 @@ const ArticlesPage = ({ isLoading }) => {
 
   return (
     <main className="articles-page">
-      <section className="article-titles">
+      <section className="article-titles animate__animated animate__fadeInLeft">
         <h2 className="article-titles-title">Article Titles</h2>
         <ul className="article-titles-list">
           {articles?.map(article => (
