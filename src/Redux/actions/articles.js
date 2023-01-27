@@ -72,8 +72,7 @@ export const createArticle = (data, token) => async (dispatch) => {
             payload: false
         })
 
-        window.location.reload();
-
+        window.location.href(`/article/${res.data.data._id}`)
     } catch (err) {
         throw new Error(err.response.data.message)
     }
