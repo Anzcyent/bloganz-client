@@ -5,14 +5,16 @@ import { useSelector, useDispatch } from "react-redux"
 import { getArticleById } from "../../Redux/actions/articles"
 import parse from "html-react-parser"
 import moment from "moment"
-import {Loading} from "../../Components"
+import { Loading } from "../../Components"
 
 const ArticlePage = () => {
     const dispatch = useDispatch()
     const { current_article } = useSelector(state => state.articlesReducer)
     const { isLoading } = useSelector(state => state.appReducer)
     const { id } = useParams()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    localStorage.setItem('article', id);
 
 
     useEffect(() => {

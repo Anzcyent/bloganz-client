@@ -17,10 +17,14 @@ export const getArticles = () => async (dispatch) => {
             payload: res.data.data
         })
 
-        dispatch({
-            type: articlesConstants.GET_CURRENT_ARTICLE,
-            payload: res.data.data[Math.floor(Math.random() * res.data.data.length)]
-        })
+        if (!localStorage.getItem('article')) {
+            dispatch({
+                type: articlesConstants.GET_CURRENT_ARTICLE,
+                payload: res.data.data[Math.floor(Math.random() * res.data.data.length)]
+            });
+        } else {
+            dispatch(getArticleById(String(localStorage.getItem('article'))))
+        }
 
         dispatch({
             type: appConstants.IS_LOADING,
@@ -54,7 +58,7 @@ export const getArticleById = (id) => async (dispatch) => {
     }
 }
 
-export const createArticle = (data, token) => async (dispatch) => {
+export const createArticle = (data, token, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: appConstants.IS_LOADING,
@@ -72,8 +76,9 @@ export const createArticle = (data, token) => async (dispatch) => {
             payload: false
         })
 
-        window.location.href(`/article/${res.data.data._id}`)
+        navigate(`/article/${res.data.data._id}`);
     } catch (err) {
+        alert(err.response.data.message)
         throw new Error(err.response.data.message)
     }
 }

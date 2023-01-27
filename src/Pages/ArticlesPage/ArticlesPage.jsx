@@ -13,6 +13,7 @@ const ArticlesPage = ({ isLoading }) => {
 
   useEffect(() => {
     dispatch(getArticles())
+    setActiveTitle(current_article.title)
   }, [dispatch])
 
 

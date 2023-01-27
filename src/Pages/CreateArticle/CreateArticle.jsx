@@ -28,8 +28,7 @@ const CreateArticle = () => {
         e.preventDefault();
 
         if (!/^(<p|<h[1-6])><br><\/(p|h[1-6])>$/.test(data.description)) {
-            dispatch(createArticle(data, access_token))
-            navigate("/articles")
+            dispatch(createArticle(data, access_token, navigate))
         }
     }
 
