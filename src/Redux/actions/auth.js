@@ -113,6 +113,15 @@ export const generateNewToken = (token) => async (dispatch) => {
 }
 
 export const authLogout = () => async (dispatch) => {
+    dispatch({
+        type: appConstants.IS_LOADING,
+        payload: true
+    });
     const res = await getRequest('auth/logout');
     localStorage.removeItem('access_token');
+
+    dispatch({
+        type: appConstants.IS_LOADING,
+        payload: false
+    });
 }
