@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom'
 const ArticlesPage = ({ isLoading }) => {
   const dispatch = useDispatch()
   const { articles, current_article } = useSelector(state => state.articlesReducer)
-  const [active_title, setActiveTitle] = useState(current_article?.title)
+  const [active_title, setActiveTitle] = useState(null)
+  localStorage.removeItem('article')
 
   useEffect(() => {
     dispatch(getArticles())
-    setActiveTitle(current_article.title)
   }, [dispatch])
 
 
@@ -43,7 +43,7 @@ const ArticlesPage = ({ isLoading }) => {
         </ul>
       </section>
       <section>
-        {current_article && <Article article={current_article} />}
+        {current_article && <Article article={current_article} isLoading={isLoading} />}
       </section>
     </main>
   )

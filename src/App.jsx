@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setResponsive } from "./Redux/actions/app"
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { generateNewToken } from './Redux/actions/auth'
 import "animate.css"
 import "./App.css"
@@ -10,13 +10,11 @@ import "./App.css"
 import { Navbar, Footer } from './Components'
 
 // Pages
-import { ArticlesPage, AboutPage, NotFound, Dashboard, CreateArticle, ArticlePage, RegisterPage, LoginPage, MyArticlesPage, HomePage } from "./Pages"
+import { ArticlesPage, AboutPage, NotFound, Dashboard, CreateArticle, ArticlePage, RegisterPage, LoginPage, MyArticlesPage, HomePage, EditArticle } from "./Pages"
 
 const App = () => {
   const { responsive, isLoading, error } = useSelector(state => state.appReducer)
   const dispatch = useDispatch()
-  const location = useLocation()
-  const navigate = useNavigate()
   const access_token = localStorage.getItem('access_token');
 
 
@@ -53,6 +51,7 @@ const App = () => {
         <Route exact path="/about" element={<AboutPage />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/dashboard/create-article" element={<CreateArticle />} />
+        <Route exact path="/edit-article/:id" element={<EditArticle />} />
         <Route exact path="/dashboard/my-articles" element={<MyArticlesPage isLoading={isLoading} />} />
         <Route exact path="/article/:id" element={<ArticlePage />} />
         <Route exact path="/register" element={<RegisterPage error={error} />} />

@@ -48,6 +48,12 @@
     background-color: var(--secondary-color);
 }
 
+.article-footer {
+    display: flex;
+    align-self: center;
+    margin-top: 1rem;
+}
+
 @media (max-width: 767px) {
     .article-title {
         font-size: 13px;
@@ -65,5 +71,10 @@
 
     .article-description::-webkit-scrollbar {
         width: 4px;
+    }
+
+    .article-footer button {
+        font-size: 8px;
+        padding: .3rem !important;
     }
 }

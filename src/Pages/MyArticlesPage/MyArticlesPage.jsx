@@ -2,21 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getArticlesOfOwner, getArticleById } from '../../Redux/actions/articles'
 import { Article, Loading } from '../../Components'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./MyArticlesPage.css"
 
 const MyArticlesPage = ({ isLoading }) => {
     const dispatch = useDispatch()
     const { articles, current_article } = useSelector(state => state.articlesReducer)
-    const [active_title, setActiveTitle] = useState(current_article?.title)
+    const [active_title, setActiveTitle] = useState(articles[0]?.title)
     const access_token = localStorage.getItem('access_token');
+    const navigate = useNavigate();
 
+  
     useEffect(() => {
         dispatch(getArticlesOfOwner(access_token))
+        setActiveTitle(current_article.title)
+
+        if (!access_token) {
+            alert('You have to login for this operation.')
+            navigate('/login')
+        }
     }, [dispatch])
 
 
     const setCurrentArticle = (article) => {
+        localStorage.setItem('article', article._id);
         dispatch(getArticleById(article._id))
 
         setActiveTitle(article.title)
@@ -43,7 +52,7 @@ const MyArticlesPage = ({ isLoading }) => {
                 </ul>
             </section>
             <section className="article">
-                <Article article={current_article} />
+                {localStorage.getItem('article') && <Article article={current_article} isLoading={isLoading} />}
             </section>
         </main>
     )

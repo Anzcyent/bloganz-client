@@ -16,6 +16,12 @@ export const postRequest = async (url, data, token) => {
     });
 
     return res;
+}
 
+export const putRequest = async (url, data, token) => {
+    const res = await axios.put(`/api/${url}`, data, {
+        headers: { 'Authorization': `Bearer:${token}` },
+    });
 
+    return res;
 }

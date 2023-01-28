@@ -1,5 +1,5 @@
 import { articlesConstants, appConstants } from "../constants";
-import { getRequest, postRequest } from "../../Utils/Fetch/fetchData";
+import { getRequest, postRequest, putRequest } from "../../Utils/Fetch/fetchData";
 
 
 export const getArticles = () => async (dispatch) => {
@@ -23,7 +23,7 @@ export const getArticles = () => async (dispatch) => {
                 payload: res.data.data[Math.floor(Math.random() * res.data.data.length)]
             });
         } else {
-            dispatch(getArticleById(String(localStorage.getItem('article'))))
+            dispatch(getArticleById(localStorage.getItem('article')))
         }
 
         dispatch({
@@ -41,18 +41,22 @@ export const getArticleById = (id) => async (dispatch) => {
         dispatch({
             type: appConstants.IS_LOADING,
             payload: true
-        })
+        });
+
         const res = await getRequest(`article/article/${id}`);
 
         dispatch({
             type: articlesConstants.GET_CURRENT_ARTICLE,
             payload: res.data.data
-        })
+        });
+
+
 
         dispatch({
             type: appConstants.IS_LOADING,
             payload: false
-        })
+        });
+
     } catch (err) {
         throw new Error(err.response.data.message);
     }
@@ -97,13 +101,46 @@ export const getArticlesOfOwner = (token) => async (dispatch) => {
             payload: res.data.data
         });
 
+        if (!localStorage.getItem('article')) {
+            dispatch({
+                type: articlesConstants.GET_CURRENT_ARTICLE,
+                payload: res.data.data[Math.floor(Math.random() * res.data.data.length)]
+            });
+        } else {
+            dispatch(getArticleById(localStorage.getItem('article')))
+        }
+
         dispatch({
             type: appConstants.IS_LOADING,
             payload: false
         });
     } catch (err) {
         alert(err.response.data.message);
-        window.location.href = "/articles"
     }
 
+}
+
+export const editArticle = (id, data, token, navigate) => async (dispatch) => {
+    try {
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: true
+        })
+
+        const res = await putRequest(`article/edit-article/${id}`, data, token);
+
+        dispatch(getArticles())
+
+        dispatch(getArticleById(res.data.data._id))
+
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: false
+        })
+
+        navigate(`/article/${res.data.data._id}`);
+    } catch (err) {
+        alert(err.response.data.message)
+        throw new Error(err.response.data.message)
+    }
 }

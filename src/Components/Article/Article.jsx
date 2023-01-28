@@ -3,11 +3,17 @@ import "./Article.css"
 import parse from "html-react-parser"
 import { Link } from "react-router-dom"
 import moment from "moment"
+import Loading from '../Loading/Loading'
+import { useSelector } from "react-redux"
 
-const Article = ({ article }) => {
+const Article = ({ article, isLoading }) => {
     if (article.length === 0) return <div className="article animate__animated animate__fadeIn">
         <h2>No articles found.</h2>
     </div>
+
+    if (isLoading) return <Loading />
+
+    const { user } = useSelector(state => state.authReducer);
 
     return (
         <div className="article animate__animated animate__fadeIn">
@@ -26,6 +32,13 @@ const Article = ({ article }) => {
             <section className="container article-description">
                 {article.description && parse(article.description)}
             </section>
+
+            {user?._id === article?.author?._id && 
+            <footer className="article-footer">
+                <Link to={`/edit-article/${article._id}`}><button style={{backgroundColor: 'darkblue', padding: ".7rem"}}><i className="fa-solid fa-pen-to-square"></i></button></Link>
+                {/* <button style={{backgroundColor: 'red', padding: ".7rem"}}><i className="fa-solid fa-trash"></i></button> */}
+            </footer>}
+
         </div>
     )
 }
