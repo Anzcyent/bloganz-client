@@ -43,14 +43,12 @@ export const getArticleById = (id) => async (dispatch) => {
             payload: true
         });
 
-        const res = await getRequest(`article/article/${id}`);
+        const res = await getRequest(`article/${id}`);
 
         dispatch({
             type: articlesConstants.GET_CURRENT_ARTICLE,
             payload: res.data.data
         });
-
-
 
         dispatch({
             type: appConstants.IS_LOADING,

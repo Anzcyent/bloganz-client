@@ -35,7 +35,7 @@ const HomePage = () => {
                     O benden kaynaklı bir şey değil. Bana bedava domain ve hosting sağlayan render.com kaynaklı. Bedava mal işte yapacak bir şey yok. Bug falan görürseniz bana bildirin. )<br />
                 </p>
                 <br />
-                <b>Alpha v1.3.7 notes: </b><br />
+                <b>Alpha v1.3.9 notes: </b><br />
                 <small>Makale silme ve editleme eklendi.</small>
             </section>
         </main>

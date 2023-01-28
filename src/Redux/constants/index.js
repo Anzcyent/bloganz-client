@@ -11,6 +11,10 @@ export const articlesConstants = {
     GET_ARTICLES_OF_OWNER: "GET_ARTICLES_OF_OWNER",
 }
 
+export const userConstants = {
+    GET_USER: "GET_USER",
+}
+
 export const authConstants = {
     AUTH: "AUTH"
 }
