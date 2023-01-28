@@ -37,7 +37,7 @@ const MyArticlesPage = ({ isLoading }) => {
 
     if (articles.length === 0) return <main className="my-articles-page">
         <div className="my-articles-page-no-article">
-            <h2>It seems that you don't have a blog yet. <Link to="/dashboard/create-article">Would you create a new one?</Link></h2>
+            <h2>It seems that you don't have a blog yet. <Link to="/dashboard/create-article">Wanna create a new one?</Link></h2>
         </div>
     </main>
 
