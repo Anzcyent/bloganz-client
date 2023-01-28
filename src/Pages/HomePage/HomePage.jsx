@@ -32,7 +32,11 @@ const HomePage = () => {
                 <p>{randomJoke}</p>
                 <br />
                 <p>(Burayı ve yukarıdaki iğrenç görsel ve şakaları (yani tüm sayfayı aq) öylesine koydum yer dolsun diye. Değişecek. Siteye refresh atınca not found hatası gösterecektir.
-                    O benden kaynaklı bir şey değil. Bana bedava domain ve hosting sağlayan render.com kaynaklı. Bedava mal işte yapacak bir şey yok. Bug falan görürseniz bana bildirin. )</p>
+                    O benden kaynaklı bir şey değil. Bana bedava domain ve hosting sağlayan render.com kaynaklı. Bedava mal işte yapacak bir şey yok. Bug falan görürseniz bana bildirin. )<br />
+                </p>
+                <br />
+                <b>Alpha v1.3.7 notes: </b><br />
+                <small>Makale silme ve editleme eklendi.</small>
             </section>
         </main>
     )
