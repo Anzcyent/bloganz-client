@@ -25,3 +25,12 @@ export const putRequest = async (url, data, token) => {
 
     return res;
 }
+
+export const deleteRequest = async (url, token) => {
+    const res = await axios.delete(`/api/${url}`, {
+        headers: { 'Authorization': `Bearer:${token}` },
+    });
+
+    return res;
+
+}

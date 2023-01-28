@@ -1,5 +1,5 @@
 import { articlesConstants, appConstants } from "../constants";
-import { getRequest, postRequest, putRequest } from "../../Utils/Fetch/fetchData";
+import { getRequest, postRequest, putRequest, deleteRequest } from "../../Utils/Fetch/fetchData";
 
 
 export const getArticles = () => async (dispatch) => {
@@ -144,3 +144,25 @@ export const editArticle = (id, data, token, navigate) => async (dispatch) => {
         throw new Error(err.response.data.message)
     }
 }
+
+export const deleteArticle = (id, token, navigate) => async (dispatch) => {
+    try {
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: true
+        });
+
+        const res = await deleteRequest(`article/delete-article/${id}`, token);
+
+        dispatch(getArticles());
+
+        navigate("/articles");
+
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: false
+        })
+    } catch (err) {
+        throw new Error(err.response.data.message);
+    }
+} 

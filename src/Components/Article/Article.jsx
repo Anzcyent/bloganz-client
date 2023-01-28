@@ -1,10 +1,11 @@
 import React from 'react'
 import "./Article.css"
 import parse from "html-react-parser"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import moment from "moment"
 import Loading from '../Loading/Loading'
-import { useSelector } from "react-redux"
+import { useSelector , useDispatch} from "react-redux"
+import { deleteArticle } from '../../Redux/actions/articles'
 
 const Article = ({ article, isLoading }) => {
     if (article.length === 0) return <div className="article animate__animated animate__fadeIn">
@@ -14,6 +15,9 @@ const Article = ({ article, isLoading }) => {
     if (isLoading) return <Loading />
 
     const { user } = useSelector(state => state.authReducer);
+    const access_token = localStorage.getItem('access_token');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
         <div className="article animate__animated animate__fadeIn">
@@ -36,7 +40,7 @@ const Article = ({ article, isLoading }) => {
             {user?._id === article?.author?._id && 
             <footer className="article-footer">
                 <Link to={`/edit-article/${article._id}`}><button style={{backgroundColor: 'darkblue', padding: ".7rem"}}><i className="fa-solid fa-pen-to-square"></i></button></Link>
-                {/* <button style={{backgroundColor: 'red', padding: ".7rem"}}><i className="fa-solid fa-trash"></i></button> */}
+                <button onClick={() => dispatch(deleteArticle(article._id, access_token, navigate))} style={{backgroundColor: 'red', padding: ".7rem"}}><i className="fa-solid fa-trash"></i></button>
             </footer>}
 
         </div>

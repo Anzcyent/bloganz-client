@@ -77,4 +77,8 @@
         font-size: 8px;
         padding: .3rem !important;
     }
+
+    .see-details button{
+        font-size: 8px;
+    }
 }

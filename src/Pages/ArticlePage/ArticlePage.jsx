@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react'
 import "./ArticlePage.css"
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getArticleById } from "../../Redux/actions/articles"
 import parse from "html-react-parser"
 import moment from "moment"
 import { Loading } from "../../Components"
+import { deleteArticle } from '../../Redux/actions/articles'
 
 const ArticlePage = () => {
     const dispatch = useDispatch()
     const { current_article } = useSelector(state => state.articlesReducer)
     const { isLoading } = useSelector(state => state.appReducer)
+    const { user } = useSelector(state => state.authReducer)
     const { id } = useParams()
     const navigate = useNavigate();
+    const access_token = localStorage.getItem('access_token');
 
     localStorage.setItem('article', id);
 
@@ -32,8 +35,17 @@ const ArticlePage = () => {
             </section>
 
             <footer className="article-page-footer">
-                <span><i className="fa-regular fa-calendar" id="article-date-icon" />{moment(current_article?.createdAt).format("MMM Do YYYY, h:mm:ss a")}</span>
-                <span>@&nbsp;{current_article?.author?.name}</span>
+                <div>
+                    <span><i className="fa-regular fa-calendar" id="article-date-icon" />{moment(current_article?.createdAt).format("MMM Do YYYY, h:mm:ss a")}</span>
+                    <br />
+                    <span>@&nbsp;{current_article?.author?.name}</span>
+                </div>
+
+                {user?._id === current_article?.author?._id && <div className="article-page-footer-utils">
+                    <Link to={`/edit-article/${current_article?._id}`}><button style={{ backgroundColor: 'darkblue', padding: ".7rem" }}><i className="fa-solid fa-pen-to-square"></i></button></Link>
+                    <button onClick={() => dispatch(deleteArticle(current_article?._id, access_token, navigate))} style={{ backgroundColor: 'red', padding: ".7rem" }}><i className="fa-solid fa-trash"></i></button>
+                </div>}
+
             </footer>
         </main>
     )

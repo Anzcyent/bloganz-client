@@ -35,4 +35,8 @@
     .article-page-footer {
         font-size: 10px;
     }
+
+    .article-page-footer-utils button{
+        font-size: 9px;
+    }
 }
