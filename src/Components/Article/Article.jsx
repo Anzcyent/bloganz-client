@@ -23,7 +23,7 @@ const Article = ({ article, isLoading }) => {
         <div className="article animate__animated animate__fadeIn">
             <h2 className='article-title'>{article.title}</h2>
             <div className="article-info">
-                <small className="article-author article-info-item">@{article?.author?.name}</small>
+                <small className="article-author article-info-item"><Link style={{color: "var(--primary-color)", textDecoration: "none"}} to={`/profile/${article?.author?._id}`}>@{article?.author?.name}</Link></small>
                 <div className="article-created-at article-info-item">
                     <i className="fa-regular fa-calendar" id="article-date-icon" />
                     <small className="article-date">{moment(article.createdAt).format("MMM D, YYYY")}</small>

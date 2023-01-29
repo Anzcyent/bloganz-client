@@ -54,7 +54,7 @@ const App = () => {
         <Route exact path="/edit-article/:id" element={<EditArticle />} />
         <Route exact path="/dashboard/my-articles" element={<MyArticlesPage isLoading={isLoading} />} />
         <Route exact path="/article/:id" element={<ArticlePage />} />
-        <Route exact path="/profile/:id" element={<UserPage />} />
+        <Route exact path="/profile/:id" element={<UserPage isLoading={isLoading} />} />
         <Route exact path="/register" element={<RegisterPage error={error} />} />
         <Route exact path="/login" element={<LoginPage error={error} />} />
         <Route path="*" element={<NotFound />} />

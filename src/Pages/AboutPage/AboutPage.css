@@ -17,6 +17,16 @@
     top: 10%;
 }
 
+@media (max-width: 768px) {
+    .about-title {
+        font-size: 13px;
+    }
+
+    .about-description {
+        font-size: 12px;
+    }
+}
+
 @media (max-width: 1280px) {
     .language-buttons {
         top: 50%;

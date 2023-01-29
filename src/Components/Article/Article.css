@@ -54,6 +54,10 @@
     margin-top: 1rem;
 }
 
+.article-author a:hover {
+    text-decoration: underline !important;
+}
+
 @media (max-width: 767px) {
     .article-title {
         font-size: 13px;
