@@ -31,7 +31,7 @@ const RegisterPage = ({ error }) => {
                     required: "This field is required",
                     validate: (val) => {
                         if (watch('password') != val) {
-                            return <span className="form-error">"Your passwords do not match"</span>;
+                            return <span className="form-error">Your passwords do not match</span>;
                         }
                     }
                 })} />

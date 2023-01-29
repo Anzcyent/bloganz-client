@@ -17,11 +17,13 @@ const editorConfig = {
     ]
 }
 
+// react-hook-form kullanmadım çünkü text editör işi bozuyor
 const CreateArticle = () => {
     const [data, setData] = useState({ title: "", description: "" });
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const access_token = localStorage.getItem('access_token');
+    const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,6 +31,8 @@ const CreateArticle = () => {
         if (!/^(<p|<h[1-6])><br><\/(p|h[1-6])>$/.test(data.description)) {
             dispatch(createArticle(data, access_token, navigate))
         }
+
+        setSubmitted(true);
     }
 
     const handleChange = (e) => {
@@ -48,15 +52,17 @@ const CreateArticle = () => {
         <main className="create-article-page">
             <h2 className='create-article-page-title animate__animated animate__backInDown'>Create Article</h2>
 
-            <form method="POST" className="create-article-form animate__animated animate__zoomIn">
+            <form onSubmit={handleSubmit} method="POST" className="create-article-form animate__animated animate__zoomIn">
                 <div className="create-article-title">
                     <label htmlFor="title"><h4>Title</h4></label>
                     <input type="text" name="title" id="title" onChange={handleChange} />
+                    {submitted && (data.title.length < 5 || data.title.length > 35 || !data.title) && <span className="form-error">Your title should be longer than 5 and shorther than 35 characters.</span>}
                 </div>
 
                 <ReactQuill theme="snow" onChange={e => setData({ ...data, description: e })} className='create-article-editor' modules={editorConfig} />
+                {submitted && (data.description.length < 100 || !data.description) && <span className="form-error">Your description is too short.</span>}
 
-                <button onClick={handleSubmit} className='create-article-submit' type="submit">Create</button>
+                <button className='create-article-submit' type="submit">Create</button>
             </form>
 
 
