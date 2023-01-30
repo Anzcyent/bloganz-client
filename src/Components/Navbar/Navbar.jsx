@@ -43,7 +43,7 @@ const Navbar = ({ responsive, isLoading }) => {
         :
         access_token ?
           <div className="auth-menu">
-            <span>{isLoading ? <Rings color="#fff" width="50" /> : user.name}</span>
+            <NavLink to={`/profile/${user._id}`}>{isLoading ? <Rings color="#fff" width="50" /> : user.name}</NavLink>
             <i onClick={() => logout()} className="fa-solid fa-right-from-bracket"></i>
           </div> :
           <ul className="navbar-auth-list">

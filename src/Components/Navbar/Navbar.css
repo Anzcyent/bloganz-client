@@ -73,8 +73,14 @@ nav {
     align-items: center;
 }
 
-.auth-menu span {
+.auth-menu a {
     margin-right: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.auth-menu a:hover {
+    opacity: .8;
 }
 
 .auth-menu i {
