@@ -28,7 +28,7 @@ const ArticlePage = () => {
 
     return (
         <main className="article-page container">
-            <h2 className="article-page-title">{current_article?.title}<button onClick={() => navigate("/articles")} title="Go Back"><i className="fas fa-arrow-left"></i></button></h2>
+            <h2 className="article-page-title">{current_article?.title}<button onClick={() => navigate(-1)} title="Go Back"><i className="fas fa-arrow-left"></i></button></h2>
             <hr />
             <section className="article-page-description">
                 {parse(String(current_article?.description))}
@@ -38,7 +38,7 @@ const ArticlePage = () => {
                 <div>
                     <span><i className="fa-regular fa-calendar" id="article-date-icon" />{moment(current_article?.createdAt).format("MMM Do YYYY, h:mm:ss a")}</span>
                     <br />
-                    <span>@&nbsp;{current_article?.author?.name}</span>
+                    <Link style={{textDecoration: 'none', color: 'var(--primary-color)'}} to={`/profile/${current_article?.author?._id}`}>@{current_article?.author?.name}</Link>
                 </div>
 
                 {user?._id === current_article?.author?._id && <div className="article-page-footer-utils">
