@@ -46,6 +46,7 @@ const ArticlePage = () => {
                     <button onClick={() => dispatch(deleteArticle(current_article?._id, access_token, navigate))} style={{ backgroundColor: 'red', padding: ".7rem" }}><i className="fa-solid fa-trash"></i></button>
                 </div>
                     :
+                    access_token &&
                     <div className="article-page-footer-utils">
                         <button style={{padding: ".7rem"}} onClick={() => dispatch(voteArticle(current_article?._id, access_token))}><i className="fa-solid fa-heart"></i>{current_article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{current_article.votes.length}</span>}</button>
                     </div>
