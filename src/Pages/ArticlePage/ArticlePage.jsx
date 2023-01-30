@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import "./ArticlePage.css"
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
-import { getArticleById } from "../../Redux/actions/articles"
+import { getArticleById, voteArticle } from "../../Redux/actions/articles"
 import parse from "html-react-parser"
 import moment from "moment"
 import { Loading } from "../../Components"
@@ -38,13 +38,18 @@ const ArticlePage = () => {
                 <div>
                     <span><i className="fa-regular fa-calendar" id="article-date-icon" />{moment(current_article?.createdAt).format("MMM Do YYYY, h:mm:ss a")}</span>
                     <br />
-                    <Link style={{textDecoration: 'none', color: 'var(--primary-color)'}} to={`/profile/${current_article?.author?._id}`}>@{current_article?.author?.name}</Link>
+                    <Link style={{ textDecoration: 'none', color: 'var(--primary-color)' }} to={`/profile/${current_article?.author?._id}`}>@{current_article?.author?.name}</Link>
                 </div>
 
-                {user?._id === current_article?.author?._id && <div className="article-page-footer-utils">
+                {user?._id === current_article?.author?._id ? <div className="article-page-footer-utils">
                     <Link to={`/edit-article/${current_article?._id}`}><button style={{ backgroundColor: 'darkblue', padding: ".7rem" }}><i className="fa-solid fa-pen-to-square"></i></button></Link>
                     <button onClick={() => dispatch(deleteArticle(current_article?._id, access_token, navigate))} style={{ backgroundColor: 'red', padding: ".7rem" }}><i className="fa-solid fa-trash"></i></button>
-                </div>}
+                </div>
+                    :
+                    <div className="article-page-footer-utils">
+                        <button style={{padding: ".7rem"}} onClick={() => dispatch(voteArticle(current_article?._id, access_token))}><i className="fa-solid fa-heart"></i>{current_article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{current_article.votes.length}</span>}</button>
+                    </div>
+                }
 
             </footer>
         </main>

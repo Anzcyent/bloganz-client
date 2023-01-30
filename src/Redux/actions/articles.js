@@ -164,3 +164,23 @@ export const deleteArticle = (id, token, navigate) => async (dispatch) => {
         throw new Error(err.response.data.message);
     }
 } 
+
+export const voteArticle = (id, token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: true
+        });
+
+        const res = await getRequest(`article/vote/${id}`, token);
+
+        dispatch(getArticleById(res.data.data._id));
+
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: false
+        });
+    } catch (err) {
+        throw new Error(err.response.data.message);
+    }
+}
