@@ -52,7 +52,7 @@ const MyArticlesPage = ({ isLoading }) => {
                 </ul>
             </section>
             <section className="article">
-                {localStorage.getItem('article') && <Article article={current_article} isLoading={isLoading} />}
+                {!localStorage.getItem('article') ? <span>Select your article in the left side.</span> : <Article article={current_article} isLoading={isLoading} />}
             </section>
         </main>
     )

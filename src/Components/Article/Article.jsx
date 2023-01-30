@@ -43,13 +43,13 @@ const Article = ({ article, isLoading }) => {
                 <footer className="article-footer">
                     <Link to={`/edit-article/${article._id}`}><button style={{ backgroundColor: 'darkblue' }}><i className="fa-solid fa-pen-to-square"></i></button></Link>
                     <button onClick={() => dispatch(deleteArticle(article._id, access_token, navigate))} style={{ backgroundColor: 'red' }}><i className="fa-solid fa-trash"></i></button>
-                    <button><i className="fa-solid fa-heart"></i>{article.votes.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{article.votes.length}</span>}</button>
+                    <button><i className="fa-solid fa-heart"></i>{article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{article?.votes?.length}</span>}</button>
                 </footer>
                 :
                 access_token &&
                 <footer className="article-footer">
-                    <button onClick={() => dispatch(voteArticle(article._id, access_token))}><i className="fa-solid fa-heart"></i>{article.votes.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{article.votes.length}</span>}</button>
-                    {article.votes.includes(user?._id) && <span className="animate__animated animate__fadeIn" style={{color: "var(--secondary-color)", display: "block !important"}}>You liked it.</span>}
+                    <button onClick={() => dispatch(voteArticle(article._id, access_token))}><i className="fa-solid fa-heart"></i>{article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{article.votes.length}</span>}</button>
+                    {article?.votes?.includes(user?._id) && <span className="animate__animated animate__fadeIn" style={{color: "var(--secondary-color)", display: "block !important"}}>You liked it.</span>}
                 </footer>
             }
 
