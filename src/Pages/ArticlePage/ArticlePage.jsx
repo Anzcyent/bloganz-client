@@ -48,7 +48,12 @@ const ArticlePage = () => {
                     :
                     access_token &&
                     <div className="article-page-footer-utils">
-                        <button style={{padding: ".7rem"}} onClick={() => dispatch(voteArticle(current_article?._id, access_token))}><i className="fa-solid fa-heart"></i>{current_article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{current_article.votes.length}</span>}</button>
+                       
+                        <div className="article-page-footer-utils-like-button">
+                        <button style={{ padding: ".7rem" }} onClick={() => dispatch(voteArticle(current_article?._id, access_token))}><i className="fa-solid fa-heart"></i>{current_article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{current_article.votes.length}</span>}</button>
+                            {current_article?.votes?.includes(user?._id) && <span className='animate__animated animate__fadeIn' style={{ color: "var(--secondary-color)" }}>You liked it.</span>}
+                        </div>
+
                     </div>
                 }
 
