@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./ArticlesPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { getArticles, getArticleById } from '../../Redux/actions/articles'
-import { Article, Loading } from '../../Components'
+import { Article } from '../../Components'
 import { Link } from 'react-router-dom'
 
 
@@ -21,9 +21,6 @@ const ArticlesPage = ({ isLoading }) => {
     dispatch(getArticleById(article._id))
     setActiveTitle(article.title)
   }
-
-
-  if (isLoading) return <Loading />
 
   if (articles.length === 0) return <main className="articles-page">
     <div className="articles-page-no-article">

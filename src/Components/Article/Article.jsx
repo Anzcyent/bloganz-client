@@ -49,8 +49,8 @@ const Article = ({ article, isLoading }) => {
                 access_token &&
                 <footer className="article-footer">
                     <button onClick={() => dispatch(voteArticle(article._id, access_token))}><i className="fa-solid fa-heart"></i>{article.votes.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{article.votes.length}</span>}</button>
+                    {article.votes.includes(user?._id) && <span className="animate__animated animate__fadeIn" style={{color: "var(--secondary-color)", display: "block !important"}}>You liked it.</span>}
                 </footer>
-
             }
 
         </div>

@@ -20,7 +20,7 @@ export const getArticles = () => async (dispatch) => {
         if (!localStorage.getItem('article')) {
             dispatch({
                 type: articlesConstants.GET_CURRENT_ARTICLE,
-                payload: res.data.data[Math.floor(Math.random() * res.data.data.length)]
+                payload: res.data.data[0]
             });
         } else {
             dispatch(getArticleById(localStorage.getItem('article')))
@@ -180,6 +180,7 @@ export const voteArticle = (id, token) => async (dispatch) => {
             type: appConstants.IS_LOADING,
             payload: false
         });
+        
     } catch (err) {
         throw new Error(err.response.data.message);
     }
