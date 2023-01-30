@@ -26,3 +26,17 @@
 .user-page-articles-list-item:active {
     transform: scale(.99);
 }
+
+@media (max-width: 768px) {
+    .user-page-title {
+        font-size: 13px;
+    }
+
+    .user-page span {
+        font-size: 11px;
+    }
+
+    .user-page-articles-list-item {
+        font-size: 10px;
+    }
+}

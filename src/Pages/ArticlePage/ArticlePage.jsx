@@ -38,7 +38,7 @@ const ArticlePage = () => {
                 <div>
                     <span><i className="fa-regular fa-calendar" id="article-date-icon" />{moment(current_article?.createdAt).format("MMM Do YYYY, h:mm:ss a")}</span>
                     <br />
-                    <Link style={{ textDecoration: 'none', color: 'var(--primary-color)' }} to={`/profile/${current_article?.author?._id}`}>@{current_article?.author?.name}</Link>
+                    <Link style={{ textDecoration: 'none', color: 'var(--primary-color)' }} to={`/profile/${current_article?.author?._id}`}>@{current_article?.author?.name} <span className="reputation-badge">{current_article?.author?.reputation}</span></Link>
                 </div>
 
                 {user?._id === current_article?.author?._id ? <div className="article-page-footer-utils">

@@ -23,6 +23,7 @@ const UserPage = ({ isLoading }) => {
                 <h2 className="user-page-title animate__animated animate__fadeInDown">@{current_user?.name} {id === "63d0110fc044bbcc3c2012b4" && <small style={{ fontSize: 13 }}>(Mekanın sahibi)</small>}</h2>
                 <hr />
                 <span>Shared articles: {current_user?.articles?.length}</span>
+                <span style={{marginLeft: 10}}>Reputation: <span className="reputation-badge">{current_user?.reputation}</span></span>
 
                 <ul className="user-page-articles-list animate__animated animate__fadeInLeft">
                     {current_user?.articles?.map(article => (
