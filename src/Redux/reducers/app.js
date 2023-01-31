@@ -3,6 +3,7 @@ import { appConstants } from "../constants";
 const initailState = {
     responsive: window.innerWidth < 768 ? true : false,
     isLoading: false,
+    searchLoading: false,
     error: {}
 }
 
@@ -18,6 +19,11 @@ const appReducer = (state = initailState, action) => {
             return {
                 ...state,
                 isLoading: action.payload
+            }
+        case appConstants.SEARCH_LOADING:
+            return {
+                ...state,
+                searchLoading: action.payload
             }
         case appConstants.ERROR:
             return {

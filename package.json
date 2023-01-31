@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "version": "v1.6.15",
+  "version": "v1.7.15",
   "type": "module",
   "proxy": "https://bloganz-server.onrender.com",
   "scripts": {

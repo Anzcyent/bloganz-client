@@ -11,20 +11,15 @@ export const getArticles = () => async (dispatch) => {
 
         const res = await getRequest('article');
 
+        dispatch({
+            type: articlesConstants.GET_CURRENT_ARTICLE,
+            payload: {}
+        })
 
         dispatch({
             type: articlesConstants.GET_ARTICLES,
             payload: res.data.data
         })
-
-        if (!localStorage.getItem('article')) {
-            dispatch({
-                type: articlesConstants.GET_CURRENT_ARTICLE,
-                payload: res.data.data[0]
-            });
-        } else {
-            dispatch(getArticleById(localStorage.getItem('article')))
-        }
 
         dispatch({
             type: appConstants.IS_LOADING,
@@ -99,15 +94,6 @@ export const getArticlesOfOwner = (token) => async (dispatch) => {
             payload: res.data.data
         });
 
-        if (!localStorage.getItem('article')) {
-            dispatch({
-                type: articlesConstants.GET_CURRENT_ARTICLE,
-                payload: res.data.data[Math.floor(Math.random() * res.data.data.length)]
-            });
-        } else {
-            dispatch(getArticleById(localStorage.getItem('article')))
-        }
-
         dispatch({
             type: appConstants.IS_LOADING,
             payload: false
@@ -163,7 +149,7 @@ export const deleteArticle = (id, token, navigate) => async (dispatch) => {
     } catch (err) {
         throw new Error(err.response.data.message);
     }
-} 
+}
 
 export const voteArticle = (id, token) => async (dispatch) => {
     try {
@@ -180,7 +166,30 @@ export const voteArticle = (id, token) => async (dispatch) => {
             type: appConstants.IS_LOADING,
             payload: false
         });
-        
+
+    } catch (err) {
+        throw new Error(err.response.data.message);
+    }
+}
+
+export const search = (query) => async (dispatch) => {
+    try {
+        dispatch({
+            type: appConstants.SEARCH_LOADING,
+            payload: true
+        });
+
+        const res = await getRequest(`/article/search/?title=${query}`);
+
+        dispatch({
+            type: articlesConstants.SEARCH_ARTICLES,
+            payload: res.data.data
+        });
+
+        dispatch({
+            type: appConstants.SEARCH_LOADING,
+            payload: false
+        });
     } catch (err) {
         throw new Error(err.response.data.message);
     }

@@ -2,7 +2,8 @@ import { articlesConstants } from "../constants";
 
 const initialState = {
     articles: [],
-    current_article: {}
+    current_article: {},
+    filtered_articles: []
 }
 
 
@@ -23,6 +24,11 @@ const articlesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 articles: action.payload
+            }
+        case articlesConstants.SEARCH_ARTICLES:
+            return {
+                ...state,
+                filtered_articles: action.payload
             }
         default:
             return state;

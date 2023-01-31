@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react'
 import "./ArticlesPage.css"
 import { useDispatch, useSelector } from "react-redux"
 import { getArticles, getArticleById } from '../../Redux/actions/articles'
-import { Article } from '../../Components'
+import { Article, Search } from '../../Components'
 import { Link } from 'react-router-dom'
 
 
+
 const ArticlesPage = ({ isLoading }) => {
-  const dispatch = useDispatch()
-  const { articles, current_article } = useSelector(state => state.articlesReducer)
-  const [active_title, setActiveTitle] = useState(null)
-  localStorage.removeItem('article')
+  const dispatch = useDispatch();
+  const { articles, current_article } = useSelector(state => state.articlesReducer);
+  const [active_title, setActiveTitle] = useState(null);
+
+
 
   useEffect(() => {
     dispatch(getArticles())
@@ -40,7 +42,7 @@ const ArticlesPage = ({ isLoading }) => {
         </ul>
       </section>
       <section>
-        {current_article && <Article article={current_article} isLoading={isLoading} />}
+        {current_article._id ? <Article article={current_article} isLoading={isLoading} /> : <Search /> }
       </section>
     </main>
   )

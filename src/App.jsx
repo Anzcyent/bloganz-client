@@ -13,7 +13,7 @@ import { Navbar, Footer } from './Components'
 import { ArticlesPage, AboutPage, NotFound, Dashboard, CreateArticle, ArticlePage, RegisterPage, LoginPage, MyArticlesPage, HomePage, EditArticle, UserPage } from "./Pages"
 
 const App = () => {
-  const { responsive, isLoading, error } = useSelector(state => state.appReducer)
+  const { responsive, isLoading, searchLoading, error } = useSelector(state => state.appReducer)
   const dispatch = useDispatch()
   const access_token = localStorage.getItem('access_token');
 
