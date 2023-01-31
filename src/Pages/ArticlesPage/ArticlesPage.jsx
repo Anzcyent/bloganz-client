@@ -6,12 +6,10 @@ import { Article, Search } from '../../Components'
 import { Link } from 'react-router-dom'
 
 
-
 const ArticlesPage = ({ isLoading }) => {
   const dispatch = useDispatch();
   const { articles, current_article } = useSelector(state => state.articlesReducer);
   const [active_title, setActiveTitle] = useState(null);
-
 
 
   useEffect(() => {
@@ -24,7 +22,9 @@ const ArticlesPage = ({ isLoading }) => {
     setActiveTitle(article.title)
   }
 
-  if (articles.length === 0) return <main className="articles-page">
+
+
+  if (!isLoading && articles.length === 0) return <main className="articles-page">
     <div className="articles-page-no-article">
       <h2>It seems that there is no blog shared with others. <Link to="/dashboard/create-article">Wanna create the first one?</Link></h2>
     </div>

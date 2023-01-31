@@ -13,6 +13,11 @@ const MyArticlesPage = ({ isLoading }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        dispatch({
+            type: "GET_CURRENT_ARTICLE",
+            payload: {}
+        });
+        
         dispatch(getArticlesOfOwner(access_token))
         setActiveTitle(current_article.title)
 
