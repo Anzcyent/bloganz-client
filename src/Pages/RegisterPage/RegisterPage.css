@@ -37,4 +37,8 @@
     .register-page-form button {
         font-size: 10px;
     }
+
+    .password-eye {
+        font-size: 13px;
+    }
 }

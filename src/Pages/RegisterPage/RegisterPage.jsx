@@ -10,6 +10,7 @@ const RegisterPage = ({ error }) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const onSubmit = (data) => {
@@ -25,9 +26,9 @@ const RegisterPage = ({ error }) => {
                 {errors.name && <span className="form-error">{errors.name.message}</span>}
                 <input type="email" placeholder="E-Mail" {...register("email", { required: "This field is required" })} />
                 {errors.email && <span className="form-error">{errors.email.message}</span>}
-                <input type="password" placeholder="Password" {...register("password", { required: "This field is required" })} />
+                <input type={showPassword ? "text" : "password"} placeholder="Password" {...register("password", { required: "This field is required" })} />
                 {errors.password && <span className="form-error">{errors.password.message}</span>}
-                <input type="password" placeholder="Confirm Your Password" {...register("confirm_password", {
+                <input type={showPassword ? "text" : "password"} placeholder="Confirm Your Password" {...register("confirm_password", {
                     required: "This field is required",
                     validate: (val) => {
                         if (watch('password') != val) {
@@ -35,6 +36,7 @@ const RegisterPage = ({ error }) => {
                         }
                     }
                 })} />
+                <i onClick={() => setShowPassword(prev => !prev)} style={{ cursor: 'pointer', margin: 5 }} className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"} password-eye`}></i>
                 {errors.confirm_password && <span className="form-error">{errors.confirm_password.message}</span>}
 
                 {error && error.name === "register" && <span className="form-error">{error.message}</span>}
