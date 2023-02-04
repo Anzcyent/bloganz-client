@@ -15,7 +15,12 @@ const Comments = ({ id, article }) => {
     const dispatch = useDispatch();
 
     const onSubmit = () => {
-        dispatch(createComment(id, data, access_token));
+        if (data.description.trim().length > 10) {
+            dispatch(createComment(id, data, access_token));
+        } else {
+            alert("You can't abuse 10 characters long with spaces.")
+        }
+
     }
 
     useEffect(() => {
