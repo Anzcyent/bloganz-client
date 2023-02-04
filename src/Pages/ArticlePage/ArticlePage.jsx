@@ -5,13 +5,12 @@ import { useSelector, useDispatch } from "react-redux"
 import { getArticleById, voteArticle } from "../../Redux/actions/articles"
 import parse from "html-react-parser"
 import moment from "moment"
-import { Loading } from "../../Components"
+import { Loading, Comments } from "../../Components"
 import { deleteArticle } from '../../Redux/actions/articles'
 
-const ArticlePage = () => {
+const ArticlePage = ({ isLoading }) => {
     const dispatch = useDispatch()
     const { current_article } = useSelector(state => state.articlesReducer)
-    const { isLoading } = useSelector(state => state.appReducer)
     const { user } = useSelector(state => state.authReducer)
     const { id } = useParams()
     const navigate = useNavigate();
@@ -48,9 +47,9 @@ const ArticlePage = () => {
                     :
                     access_token &&
                     <div className="article-page-footer-utils">
-                       
+
                         <div className="article-page-footer-utils-like-button">
-                        <button style={{ padding: ".7rem" }} onClick={() => dispatch(voteArticle(current_article?._id, access_token))}><i className="fa-solid fa-heart"></i>{current_article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{current_article.votes.length}</span>}</button>
+                            <button style={{ padding: ".7rem" }} onClick={() => dispatch(voteArticle(current_article?._id, access_token))}><i className="fa-solid fa-heart"></i>{current_article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{current_article.votes.length}</span>}</button>
                             {current_article?.votes?.includes(user?._id) && <span className='animate__animated animate__fadeIn' style={{ color: "var(--secondary-color)" }}>You liked it.</span>}
                         </div>
 
@@ -58,6 +57,10 @@ const ArticlePage = () => {
                 }
 
             </footer>
+
+            <hr />
+            <br />
+            <Comments id={id} article={current_article} token={access_token} />
         </main>
     )
 }

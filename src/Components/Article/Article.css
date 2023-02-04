@@ -24,6 +24,10 @@
     margin-right: 8px;
 }
 
+.article-comments-count {
+    margin-left: 25px;
+}
+
 .see-details {
     align-self: center;
 }

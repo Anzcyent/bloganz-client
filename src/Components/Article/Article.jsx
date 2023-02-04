@@ -15,6 +15,7 @@ const Article = ({ article, isLoading }) => {
     if (isLoading) return <Loading />
 
     const { user } = useSelector(state => state.authReducer);
+    const { responsive } = useSelector(state => state.appReducer);
     const access_token = localStorage.getItem('access_token');
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Article = ({ article, isLoading }) => {
                 <div className="article-created-at article-info-item">
                     <i className="fa-regular fa-calendar" id="article-date-icon" />
                     <small className="article-date">{moment(article.createdAt).format("MMM D, YYYY")}</small>
+                    <small title="comments" className="article-comments-count"><i className="fa-solid fa-comment"></i>&nbsp;{article.comments.length} {!responsive && `Comment${article.comments.length > 1 && "s"}`}</small>
                 </div>
             </div>
             <Link className="see-details" to={`/article/${article._id}`}>
@@ -49,7 +51,7 @@ const Article = ({ article, isLoading }) => {
                 access_token &&
                 <footer className="article-footer">
                     <button onClick={() => dispatch(voteArticle(article._id, access_token))}><i className="fa-solid fa-heart"></i>{article?.votes?.length > 0 && <span className="vote-count" style={{ marginLeft: 5 }}>{article.votes.length}</span>}</button>
-                    {article?.votes?.includes(user?._id) && <span className="animate__animated animate__fadeIn you-liked-it" style={{color: "var(--secondary-color)", display: "block !important"}}>You liked it.</span>}
+                    {article?.votes?.includes(user?._id) && <span className="animate__animated animate__fadeIn you-liked-it" style={{ color: "var(--secondary-color)", display: "block !important" }}>You liked it.</span>}
                 </footer>
             }
 

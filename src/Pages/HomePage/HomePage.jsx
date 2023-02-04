@@ -35,10 +35,8 @@ const HomePage = () => {
                     O benden kaynaklı bir şey değil. Bana bedava domain ve hosting sağlayan render.com kaynaklı. Bedava mal işte yapacak bir şey yok. Bug falan görürseniz bana bildirin. )<br />
                 </p>
                 <br />
-                <b>Alpha v1.7.17 notes: </b><br />
-                <small>Makale arama özelliği eklendi.<br></br>
-                Loading ve my articles bugu çözüldü.
-                </small>
+                <b>Alpha v1.8.19 notes: </b><br />
+                <small>Yorum yapma/görme eklendi. (Details sayfasında.)</small>
             </section>
         </main>
     )

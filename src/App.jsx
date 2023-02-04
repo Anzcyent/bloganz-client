@@ -13,7 +13,7 @@ import { Navbar, Footer } from './Components'
 import { ArticlesPage, AboutPage, NotFound, Dashboard, CreateArticle, ArticlePage, RegisterPage, LoginPage, MyArticlesPage, HomePage, EditArticle, UserPage } from "./Pages"
 
 const App = () => {
-  const { responsive, isLoading, searchLoading, error } = useSelector(state => state.appReducer)
+  const { responsive, isLoading, error } = useSelector(state => state.appReducer)
   const dispatch = useDispatch()
   const access_token = localStorage.getItem('access_token');
 
@@ -53,7 +53,7 @@ const App = () => {
         <Route exact path="/dashboard/create-article" element={<CreateArticle />} />
         <Route exact path="/edit-article/:id" element={<EditArticle />} />
         <Route exact path="/dashboard/my-articles" element={<MyArticlesPage isLoading={isLoading} />} />
-        <Route exact path="/article/:id" element={<ArticlePage />} />
+        <Route exact path="/article/:id" element={<ArticlePage isLoading={isLoading} />} />
         <Route exact path="/profile/:id" element={<UserPage isLoading={isLoading} />} />
         <Route exact path="/register" element={<RegisterPage error={error} />} />
         <Route exact path="/login" element={<LoginPage error={error} />} />
