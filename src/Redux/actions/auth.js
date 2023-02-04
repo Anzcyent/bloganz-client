@@ -112,7 +112,7 @@ export const generateNewToken = (token) => async (dispatch) => {
     }
 }
 
-export const authLogout = () => async (dispatch) => {
+export const authLogout = (navigate) => async (dispatch) => {
     dispatch({
         type: appConstants.IS_LOADING,
         payload: true
@@ -124,4 +124,6 @@ export const authLogout = () => async (dispatch) => {
         type: appConstants.IS_LOADING,
         payload: false
     });
+
+    navigate('/')
 }

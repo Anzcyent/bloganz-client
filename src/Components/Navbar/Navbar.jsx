@@ -15,7 +15,7 @@ const Navbar = ({ responsive, isLoading }) => {
 
 
   const logout = async () => {
-    dispatch(authLogout());
+    dispatch(authLogout(navigate));
   }
 
   return (
@@ -53,7 +53,7 @@ const Navbar = ({ responsive, isLoading }) => {
 
       {responsive && menu &&
         <ul className={`responsive-navbar-auth-list animate__animated animate__fadeInDown ${access_token && "active"}`}>
-          {access_token && <li className="navbar-auth-list-item">{user.name}</li>}
+          {access_token && <li className="navbar-auth-list-item"><NavLink style={{color: "#fff", textDecoration: 'none'}} to={`/profile/${user._id}`}>{user.name}</NavLink></li>}
           {!access_token && <li onClick={() => navigate("/login")} className={`navbar-auth-list-item auth-btn ${pathname === "/login" && "active"}`}>Login</li>}
           {!access_token && <li onClick={() => navigate("/register")} className={`navbar-auth-list-item auth-btn ${pathname === "/register" && "active"}`}>Register</li>}
 

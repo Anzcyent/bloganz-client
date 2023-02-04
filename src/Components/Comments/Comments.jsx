@@ -7,28 +7,27 @@ import { createComment } from '../../Redux/actions/comments'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-const Comments = ({ id, article, token }) => {
+const Comments = ({ id, article }) => {
     const [data, setData] = useState({ description: "" });
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const access_token = localStorage.getItem('access_token');
 
     const dispatch = useDispatch();
 
     const onSubmit = () => {
-        dispatch(createComment(id, data, token));
+        dispatch(createComment(id, data, access_token));
     }
 
     useEffect(() => {
         setData({ description: watch('description') })
     }, [watch('description')])
 
-    console.log(article)
-
 
     return (
         <div className="comments-section">
             <h5>Comments</h5>
 
-            <form autoComplete="off" className='comments-form' onSubmit={handleSubmit(onSubmit)}>
+            {access_token && <form autoComplete="off" className='comments-form' onSubmit={handleSubmit(onSubmit)}>
 
                 <input type="text" placeholder="What's your comment about this article?" name="description" {...register('description', {
                     required: "This field is required", minLength: {
@@ -41,8 +40,9 @@ const Comments = ({ id, article, token }) => {
                 })} />
 
                 <button type="submit">Submit</button>
-            </form>
-            {errors.description && <span className="form-error">{errors.description.message}</span>}
+            </form>}
+
+            {access_token && errors.description && <span className="form-error">{errors.description.message}</span>}
             <br />
 
             <div className="comments">
