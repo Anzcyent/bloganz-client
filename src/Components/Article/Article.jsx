@@ -28,7 +28,7 @@ const Article = ({ article, isLoading }) => {
                 <div className="article-created-at article-info-item">
                     <i className="fa-regular fa-calendar" id="article-date-icon" />
                     <small className="article-date">{moment(article.createdAt).format("MMM D, YYYY")}</small>
-                    <small title="comments" className="article-comments-count"><i className="fa-solid fa-comment"></i>&nbsp;{article.comments.length} {!responsive && `Comment${article.comments.length > 1 && "s"}`}</small>
+                    <small title="comments" className="article-comments-count"><i className="fa-solid fa-comment"></i>&nbsp;{article.comments.length} {!responsive && `Comment${article.comments.length > 1 ? "s" : ""}`}</small>
                 </div>
             </div>
             <Link className="see-details" to={`/article/${article._id}`}>
