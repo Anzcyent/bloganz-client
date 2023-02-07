@@ -35,8 +35,8 @@ const HomePage = () => {
                     O benden kaynaklı bir şey değil. Bana bedava domain ve hosting sağlayan render.com kaynaklı. Bedava mal işte yapacak bir şey yok. Bug falan görürseniz bana bildirin. )<br />
                 </p>
                 <br />
-                <b>Alpha v1.8.23 notes: </b><br />
-                <small>Yorum yapma/görme eklendi. (Details sayfasında.) Comment bug çözüldü. Responsive profile gitme halloldu.</small>
+                <b>Alpha v1.9.24 notes: </b><br />
+                <small>Yoruma like atme eklendi.</small>
             </section>
         </main>
     )

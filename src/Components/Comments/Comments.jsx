@@ -3,7 +3,7 @@ import './Comments.css'
 
 import { useForm } from "react-hook-form"
 import { useDispatch } from 'react-redux'
-import { createComment } from '../../Redux/actions/comments'
+import { createComment, voteComment } from '../../Redux/actions/comments'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
@@ -17,19 +17,22 @@ const Comments = ({ id, article }) => {
     const onSubmit = () => {
         const isOnlySpaces = data.description.trim().length === 0;
         const isTooShort = data.description.trim().replace(/\s+/g, '').length < 10;
-      
+
         if (!isOnlySpaces && !isTooShort) {
-          dispatch(createComment(id, data, access_token));
+            dispatch(createComment(id, data, access_token));
         } else {
-          alert("Your comment must contain at least 10 characters without spaces.");
+            alert("Your comment must contain at least 10 characters without spaces.");
         }
-      }
-      
+    }
+
+    const vote = (comment_id) => {
+        dispatch(voteComment(comment_id, access_token));
+    }
+
 
     useEffect(() => {
         setData({ description: watch('description') })
     }, [watch('description')])
-
 
     return (
         <div className="comments-section">
@@ -61,14 +64,25 @@ const Comments = ({ id, article }) => {
                             <span className="reputation-badge">{comment.user.reputation}</span>
                         </div>
                         <div className="comment-description-area">
-                            <p className="comment-description">{comment.description}</p>
-                            <small className="comment-date"><i className="fa-regular fa-calendar" /> {moment(comment.createdAt).format("MMM Do YYYY")}</small>
+                            <div className="comment-info">
+                                <p className="comment-description">{comment.description}</p>
+                                <small className="comment-date"><i className="fa-regular fa-calendar" /> {moment(comment.createdAt).format("MMM Do YYYY")}</small>
+                            </div>
+
+                            {access_token &&
+                                <div className="comment-utils" onClick={() => vote(comment._id)}>
+                                    <span className="vote">
+                                        <i className="fa-solid fa-angle-up"></i>
+                                        <small className="vote-count">{comment?.votes?.length}</small>
+                                    </span>
+                                </div>
+                            }
                         </div>
                     </div>
                 ))}
             </div>
 
-        </div>
+        </div >
     )
 }
 

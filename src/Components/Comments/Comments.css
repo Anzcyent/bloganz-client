@@ -55,10 +55,40 @@
     background-color: var(--primary-color);
     padding: 1rem;
     margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .comment-date {
     text-shadow: 0 0 3px #fff;
+}
+
+.comment-utils {
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    padding: .3rem;
+    width: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-utils .vote {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+
+.comment-utils .vote:hover {
+    opacity: .6;
+}
+
+.comment-utils:active {
+    transform: scale(.95);
 }
 
 @media (max-width: 767px) {
@@ -69,5 +99,9 @@
     .comments-form button {
         font-size: 9px;
         padding: .5rem;
+    }
+
+    .comment-utils {
+        width: 10%;
     }
 }

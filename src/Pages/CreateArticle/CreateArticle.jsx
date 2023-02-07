@@ -28,7 +28,10 @@ const CreateArticle = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!/^(<p|<h[1-6])><br><\/(p|h[1-6])>$/.test(data.description)) {
+        const isOnlySpaces = data.title.trim().length === 0;
+        const isTooShort = data.title.trim().replace(/\s+/g, '').length < 5;
+
+        if (!/^(<p|<h[1-6])><br><\/(p|h[1-6])>$/.test(data.description) && !isOnlySpaces && !isTooShort) {
             dispatch(createArticle(data, access_token, navigate))
         }
 
