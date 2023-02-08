@@ -65,8 +65,6 @@
 }
 
 .comment-utils {
-    background-color: #fff;
-    color: #000;
     border-radius: 5px;
     padding: .3rem;
     width: 4%;
@@ -81,14 +79,29 @@
     justify-content: space-between;
     width: 100%;
     cursor: pointer;
+    background-color: #FFF;
+    color: #000;
+    padding: .3rem;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 
 .comment-utils .vote:hover {
     opacity: .6;
 }
 
-.comment-utils:active {
-    transform: scale(.95);
+.comment-utils .vote:active {
+    transform: scale(.98);
+}
+
+
+.comment-utils .delete-comment:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+.comment-utils .delete-comment:active {
+    transform: scale(.98);
 }
 
 @media (max-width: 767px) {

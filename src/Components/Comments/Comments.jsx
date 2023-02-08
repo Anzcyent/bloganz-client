@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import './Comments.css'
 
 import { useForm } from "react-hook-form"
-import { useDispatch } from 'react-redux'
-import { createComment, voteComment } from '../../Redux/actions/comments'
+import { useDispatch, useSelector } from 'react-redux'
+import { createComment, voteComment, deleteComment } from '../../Redux/actions/comments'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
@@ -13,6 +13,7 @@ const Comments = ({ id, article }) => {
     const access_token = localStorage.getItem('access_token');
 
     const dispatch = useDispatch();
+    const { user } = useSelector(state => state.authReducer);
 
     const onSubmit = () => {
         const isOnlySpaces = data.description.trim().length === 0;
@@ -27,6 +28,10 @@ const Comments = ({ id, article }) => {
 
     const vote = (comment_id) => {
         dispatch(voteComment(comment_id, access_token));
+    }
+
+    const _delete = (comment_id) => {
+        dispatch(deleteComment(comment_id, access_token));
     }
 
 
@@ -70,13 +75,21 @@ const Comments = ({ id, article }) => {
                             </div>
 
                             {access_token &&
-                                <div className="comment-utils" onClick={() => vote(comment._id)}>
-                                    <span className="vote">
+                                <div className="comment-utils">
+                                    <span className="vote" onClick={() => vote(comment._id)}>
                                         <i className="fa-solid fa-angle-up"></i>
                                         <small className="vote-count">{comment?.votes?.length}</small>
                                     </span>
+
+                                    {comment.user._id === user?._id
+                                        &&
+                                        <div className="delete-comment" onClick={() => _delete(comment._id)}>
+                                            <i style={{ color: 'red' }} className="fas fa-trash"></i>
+                                        </div>
+                                    }
                                 </div>
                             }
+
                         </div>
                     </div>
                 ))}
