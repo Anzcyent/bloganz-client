@@ -18,6 +18,7 @@ export const createComment = (id, data, token) => async (dispatch) => {
             payload: false
         });
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }
@@ -38,7 +39,8 @@ export const voteComment = (id, token) => async (dispatch) => {
             payload: false
         });
     } catch (err) {
-        alert(err.response.data.message);
+        dispatch({type: appConstants.IS_LOADING, payload: false})
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }
@@ -59,7 +61,7 @@ export const deleteComment = (id, token) => async (dispatch) => {
             payload: false
         });
     } catch (err) {
-        alert(err.response.data.message);
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 

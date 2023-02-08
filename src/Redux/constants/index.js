@@ -2,7 +2,7 @@ export const appConstants = {
     SET_RESPONSIVE: "SET_RESPONSIVE",
     IS_LOADING: "IS_LOADING",
     SEARCH_LOADING: "SEARCH_LOADING",
-    ERROR: "ERROR",
+    ERROR: "ERROR"
 }
 
 export const articlesConstants = {

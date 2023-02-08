@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "version": "v1.10.24",
+  "version": "v1.11.25",
   "type": "module",
   "proxy": "https://bloganz-server.onrender.com",
   "scripts": {
@@ -21,6 +21,7 @@
     "react-quill": "^2.0.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
+    "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
     "ua-parser-js": "^1.0.33"

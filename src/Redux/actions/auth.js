@@ -23,21 +23,7 @@ export const authRegister = (data, navigate) => async (dispatch) => {
 
         navigate('/');
     } catch (err) {
-        dispatch({
-            type: appConstants.ERROR,
-            payload: {
-                name: "register",
-                message: err.response.data.message
-            }
-        });
-
-        setTimeout(() => {
-            dispatch({
-                type: appConstants.ERROR,
-                payload: null
-            });
-        }, 2500);
-
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 
@@ -65,21 +51,7 @@ export const authLogin = (data, navigate) => async (dispatch) => {
 
         navigate('/');
     } catch (err) {
-        dispatch({
-            type: appConstants.ERROR,
-            payload: {
-                name: "login",
-                message: err.response.data.message
-            }
-        });
-
-        setTimeout(() => {
-            dispatch({
-                type: appConstants.ERROR,
-                payload: null
-            });
-        }, 2500)
-
+        dispatch({ type: appConstants.ERROR, payload: err.response.data.message });
         throw new Error(err.response.data.message);
     }
 }
@@ -108,22 +80,29 @@ export const generateNewToken = (token) => async (dispatch) => {
 
         return
     } catch (err) {
-        throw new Error(err.response.data.message)
+        dispatch({ type: appConstants.ERROR, payload: err.response.data.message });
+        throw new Error(err.response.data.message);
     }
 }
 
 export const authLogout = (navigate) => async (dispatch) => {
-    dispatch({
-        type: appConstants.IS_LOADING,
-        payload: true
-    });
-    const res = await getRequest('auth/logout');
-    localStorage.removeItem('access_token');
+    try {
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: true
+        });
+        const res = await getRequest('auth/logout');
+        localStorage.removeItem('access_token');
 
-    dispatch({
-        type: appConstants.IS_LOADING,
-        payload: false
-    });
+        dispatch({
+            type: appConstants.IS_LOADING,
+            payload: false
+        });
 
-    navigate('/')
+        navigate('/')
+    } catch (err) {
+        dispatch({ type: appConstants.ERROR, payload: err.response.data.message });
+        throw new Error(err.response.data.message);
+    }
+
 }

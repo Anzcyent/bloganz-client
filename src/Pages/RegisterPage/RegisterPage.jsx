@@ -6,7 +6,7 @@ import { authRegister } from '../../Redux/actions/auth';
 import { useNavigate } from 'react-router-dom';
 
 
-const RegisterPage = ({ error }) => {
+const RegisterPage = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -39,7 +39,6 @@ const RegisterPage = ({ error }) => {
                 <i onClick={() => setShowPassword(prev => !prev)} style={{ cursor: 'pointer', margin: 5 }} className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"} password-eye`}></i>
                 {errors.confirm_password && <span className="form-error">{errors.confirm_password.message}</span>}
 
-                {error && error.name === "register" && <span className="form-error">{error.message}</span>}
                 <button type="submit">Submit</button>
             </form>
         </main>

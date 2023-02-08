@@ -21,6 +21,7 @@ export const getUserById = (id) => async (dispatch) => {
         });
 
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }

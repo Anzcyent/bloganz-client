@@ -4,7 +4,7 @@ const initailState = {
     responsive: window.innerWidth < 768 ? true : false,
     isLoading: false,
     searchLoading: false,
-    error: {}
+    error: ""
 }
 
 

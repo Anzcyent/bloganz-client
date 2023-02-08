@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setResponsive } from "./Redux/actions/app"
 import { Routes, Route } from "react-router-dom"
 import { generateNewToken } from './Redux/actions/auth'
+import { ToastContainer, toast } from 'react-toastify'
 import "animate.css"
 import "./App.css"
 
@@ -40,7 +41,10 @@ const App = () => {
     dispatch(generateNewToken(access_token))
   }, [access_token])
 
-
+  // toastify
+  useEffect(() => {
+    if (error !== "") toast.error(error)
+  }, [error])
 
   return (
     <div className="app">
@@ -55,11 +59,25 @@ const App = () => {
         <Route exact path="/dashboard/my-articles" element={<MyArticlesPage isLoading={isLoading} />} />
         <Route exact path="/article/:id" element={<ArticlePage isLoading={isLoading} />} />
         <Route exact path="/profile/:id" element={<UserPage isLoading={isLoading} />} />
-        <Route exact path="/register" element={<RegisterPage error={error} />} />
-        <Route exact path="/login" element={<LoginPage error={error} />} />
+        <Route exact path="/register" element={<RegisterPage />} />
+        <Route exact path="/login" element={<LoginPage/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
+
+      {/* Toastify */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   )
 }

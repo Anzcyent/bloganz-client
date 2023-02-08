@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import "./LoginPage.css"
 
-const LoginPage = ({ error }) => {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
@@ -25,7 +25,6 @@ const LoginPage = ({ error }) => {
         <input type="password" placeholder="Password" {...register("password", { required: "This field is required" })} />
         {errors.password && <span className="form-error">{errors.password.message}</span>}
 
-        {error && error.name === "login" && <span className="form-error">{error.message}</span>}
         <button type="submit">Submit</button>
       </form>
     </main>

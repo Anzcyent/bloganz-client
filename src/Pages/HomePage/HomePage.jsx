@@ -35,8 +35,8 @@ const HomePage = () => {
                     O benden kaynaklı bir şey değil. Bana bedava domain ve hosting sağlayan render.com kaynaklı. Bedava mal işte yapacak bir şey yok. Bug falan görürseniz bana bildirin. )<br />
                 </p>
                 <br />
-                <b>Alpha v1.10.24 notes: </b><br />
-                <small>Yoruma like atma ve yorum silme eklendi.</small>
+                <b>Alpha v1.11.25 notes: </b><br />
+                <small>Yoruma like atma ve yorum silme eklendi. Toastify eklendi.</small>
             </section>
         </main>
     )

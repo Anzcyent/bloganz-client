@@ -26,6 +26,7 @@ export const getArticles = () => async (dispatch) => {
             payload: false
         })
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 
@@ -51,6 +52,7 @@ export const getArticleById = (id) => async (dispatch) => {
         });
 
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }
@@ -75,8 +77,8 @@ export const createArticle = (data, token, navigate) => async (dispatch) => {
 
         navigate(`/article/${res.data.data._id}`);
     } catch (err) {
-        alert(err.response.data.message)
-        throw new Error(err.response.data.message)
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
+        throw new Error(err.response.data.message);
     }
 }
 
@@ -99,7 +101,8 @@ export const getArticlesOfOwner = (token) => async (dispatch) => {
             payload: false
         });
     } catch (err) {
-        alert(err.response.data.message);
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
+        throw new Error(err.response.data.message);
     }
 
 }
@@ -124,8 +127,8 @@ export const editArticle = (id, data, token, navigate) => async (dispatch) => {
 
         navigate(`/article/${res.data.data._id}`);
     } catch (err) {
-        alert(err.response.data.message)
-        throw new Error(err.response.data.message)
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
+        throw new Error(err.response.data.message);
     }
 }
 
@@ -147,6 +150,7 @@ export const deleteArticle = (id, token, navigate) => async (dispatch) => {
             payload: false
         })
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }
@@ -168,6 +172,7 @@ export const voteArticle = (id, token) => async (dispatch) => {
         });
 
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }
@@ -191,6 +196,7 @@ export const search = (query) => async (dispatch) => {
             payload: false
         });
     } catch (err) {
+        dispatch({type: appConstants.ERROR, payload: err.response.data.message});
         throw new Error(err.response.data.message);
     }
 }
